@@ -1,0 +1,25 @@
+stages:
+  - merge_to_dev
+  - merge_to_prod
+
+merge_to_dev:
+  stage: merge_to_dev
+  script:
+    - git config --global user.email "mohamednabeel321@gmail.com"
+    - git config --global user.name "nabeeldemos"
+    - git checkout dev
+    - git merge main
+    - git push origin dev
+  only:
+    - main
+
+merge_to_prod:
+  stage: merge_to_prod
+  script:
+    - git config --global user.email "mohamednabeel321@gmail.com"
+    - git config --global user.name "nabeeldemos"
+    - git checkout prod
+    - git merge dev
+    - git push origin prod
+  only:
+    - dev
